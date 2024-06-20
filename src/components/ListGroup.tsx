@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from "react";
 
 function ListGroup() {
     let items = [
@@ -9,18 +9,27 @@ function ListGroup() {
         'Paris'
     ];
 
-    items = [];
+    // Hook
+    const [selectedIndex, setSelectedIndex] = useState(-1);
+    // arr[0]; // variable (selectedIndex)
+    // arr[1]; // updater function
 
     return (
         <>
             <h1>List</h1>
             {items.length === 0 && <p>No Item Found</p>}
             <ul className="list-group">
-                {items.map((item, key) => (
-                    <li className="list-group-item" key={item}>{item}</li>
+                {items.map((item, index) => (
+                    <li
+                        className={selectedIndex === index ? 'list-group-item active' : 'list-group-item'}
+                        key={item}
+                        onClick={() => setSelectedIndex(index)}
+                    >
+                        {item}
+                    </li>
                 ))}
 
-            </ul>
+            </ul >
         </>
     );
 }
